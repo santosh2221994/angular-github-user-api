@@ -1,0 +1,76 @@
+<div class="container">
+  <h4 class="m-0 text-center">Home</h4>
+  <div class="d-grid col-8 mx-auto card p-2 rounded-0 mt-3">
+    <div class="input-group col-12">
+      <span class="input-group-text rounded-0" id="basic-addon1">🔎</span>
+      <input
+        [(ngModel)]="username"
+        type="text"
+        class="form-control rounded-0"
+        placeholder="Search Users"
+      />
+    </div>
+    <div class="col-12">
+      <button class="btn btn-success col-12 rounded-0 mt-2" (click)="get()">
+        Search
+      </button>
+    </div>
+    <!-- <div class="col-12">
+      <button class="btn btn-info col-12 rounded-0" (click)="getusers()">
+        Get All
+      </button>
+    </div> -->
+  </div>
+  <div
+    class="d-grid col-8 mx-auto mt-2"
+    *ngIf="result == false && user == null"
+  >
+    <p class="fs-6 fst-italic fw-lighter mb-2 text-capitalize text-center">
+      No results found
+    </p>
+  </div>
+  <div class="d-grid col-8 mx-auto mt-2" *ngIf="user">
+    <p class="fs-6 fst-italic fw-lighter mb-2 text-capitalize text-center">
+      Results from github.
+    </p>
+    <a
+      class="border p-2 rounded-0 d-flex flex-wrap"
+      [routerLink]="user.login"
+      style="text-decoration: none;
+    color: #000;"
+      data-bs-toggle="tooltip"
+      data-bs-placement="left"
+      title="Tooltip on left"
+    >
+      <div class="col-3 mx-auto">
+        <img [src]="user.avatar_url" class="img-fluid" alt="user.avatar_url" />
+      </div>
+
+      <div class="col-9 mt-0 px-2">
+        <h5 class="card-title mt-0">{{ user.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ user.bio }}</h6>
+        <p class="card-text m-0">
+          <small>Public Repos: {{ user.public_repos }}</small>
+        </p>
+        <p class="card-text m-0">
+          <small>Followers: {{ user.followers }}</small>
+        </p>
+        <p class="card-text m-0">
+          <small>Following: {{ user.following }}</small
+          ><br />
+        </p>
+
+        <p class="card-text m-0">
+          <small class="text-muted"
+            >Last updated at {{ user.updated_at | date }}</small
+          >
+        </p>
+      </div>
+      <div class="col-12">
+        <p class="text-center m-0">
+          <small class="text-muted text-center">Click to view more.</small>
+        </p>
+      </div>
+    </a>
+  </div>
+</div>

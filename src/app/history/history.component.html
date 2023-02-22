@@ -1,0 +1,35 @@
+<div class="container">
+  <h4 class="m-0 text-center">Your History<small class="badge bg-dark rounded-pill translate-middle-y">
+    <small>{{history.length}}</small></small></h4>
+  <div class="d-grid col-8 mx-auto card p-2 rounded-0 mt-3">
+    <div class="list-group">
+      <button class="btn btn-danger col-12 rounded-0 mb-2" (click)="clear()">
+        Clear All
+      </button>
+      <div class="col p-0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Search Term</th>
+              <th scope="col">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of history; let i = index">
+              <th scope="row">{{ i + 1 }}.</th>
+              <td><h6 class="mb-1">{{ item.search }}</h6>
+                <small class="text-muted">{{ item.on | date: 'short' }}</small></td>
+              <td>
+                <button *ngIf="item.result" type="button" class="badge bg-light text-dark rounded-pill"(click)="navigate(item)">
+                  <img [src]="item.result.avatar_url" class="img-fluid"  style="width: 24px; border-radius: 50%;"
+                  alt="user.avatar_url" />&nbsp;<span *ngIf="item.result.name != null">{{ item.result.name }}</span><span *ngIf="item.result.name == null">{{ item.result.login }}</span></button>
+                <strong><small class="badge bg-danger rounded-pill" *ngIf="!item.result">Not Found</small></strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
